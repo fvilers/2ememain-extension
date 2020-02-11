@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "2ememain/2dehands enhancer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Enhance the 2ememain/2dehands website with useful options",
   "content_scripts": [
     {
