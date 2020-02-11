@@ -1,3 +1,9 @@
+const hide = element => {
+  if (element) {
+    element.style.display = "none";
+  }
+};
+
 const removeHomepageAds = () => {
   const feedItems = document.querySelectorAll(".mp-Listing-card.feed-item");
   const ads = Array.from(feedItems).filter(item => {
@@ -6,9 +12,7 @@ const removeHomepageAds = () => {
     return link && link.href ? !link.href.endsWith("&previousPage=home") : true;
   });
 
-  ads.forEach(ad => {
-    ad.style.display = "none";
-  });
+  ads.forEach(hide);
 };
 
 const removeSearchResultAds = () => {
@@ -19,9 +23,13 @@ const removeSearchResultAds = () => {
     item.querySelector(".mp-Listing-seller-link")
   );
 
-  ads.forEach(ad => {
-    ad.style.display = "none";
-  });
+  ads.forEach(hide);
+};
+
+const removeSideItemAds = () => {
+  const vipListings = document.querySelector("#vip-right-cas-listings");
+
+  hide(vipListings);
 };
 
 // Watch for changes being made to the DOM tree
@@ -30,6 +38,7 @@ const config = { attributes: true, childList: true, subtree: true };
 const callback = (mutationsList, observer) => {
   removeHomepageAds();
   removeSearchResultAds();
+  removeSideItemAds();
 };
 const observer = new MutationObserver(callback);
 observer.observe(targetNode, config);
