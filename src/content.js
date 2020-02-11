@@ -6,7 +6,9 @@ const removeHomepageAds = () => {
     return link && link.href ? !link.href.endsWith("&previousPage=home") : true;
   });
 
-  ads.forEach(ad => ad.replaceWith(""));
+  ads.forEach(ad => {
+    ad.style.display = "none";
+  });
 };
 
 const removeSearchResultAds = () => {
@@ -17,7 +19,9 @@ const removeSearchResultAds = () => {
     item.querySelector(".mp-Listing-seller-link")
   );
 
-  ads.forEach(ad => ad.replaceWith(""));
+  ads.forEach(ad => {
+    ad.style.display = "none";
+  });
 };
 
 // Watch for changes being made to the DOM tree
