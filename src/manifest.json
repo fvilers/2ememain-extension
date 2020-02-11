@@ -2,5 +2,11 @@
   "manifest_version": 2,
   "name": "2ememain/2dehands enhancer",
   "version": "0.0.0",
-  "description": "Enhance the 2ememain/2dehands website with useful options"
+  "description": "Enhance the 2ememain/2dehands website with useful options",
+  "content_scripts": [
+    {
+      "matches": ["https://www.2ememain.be/*", "https://www.2dehands.be/*"],
+      "js": ["content.js"]
+    }
+  ]
 }
