@@ -1,10 +1,16 @@
+const show = element => {
+  if (element) {
+    element.style.display = "";
+  }
+};
+
 const hide = element => {
   if (element) {
     element.style.display = "none";
   }
 };
 
-const removeHomepageAds = () => {
+const toggleAdsOnHomePage = force => {
   const feedItems = document.querySelectorAll(".mp-Listing-card.feed-item");
   const ads = Array.from(feedItems).filter(item => {
     const link = item.querySelector("a.mp-Listing-card-clickable-container");
@@ -12,10 +18,10 @@ const removeHomepageAds = () => {
     return link && link.href ? !link.href.endsWith("&previousPage=home") : true;
   });
 
-  ads.forEach(hide);
+  ads.forEach(force ? show : hide);
 };
 
-const removeSearchResultAds = () => {
+const toggleAdsInSearchResults = force => {
   const listItems = document.querySelectorAll(
     ".mp-Listing.mp-Listing--list-item"
   );
@@ -23,22 +29,32 @@ const removeSearchResultAds = () => {
     item.querySelector(".mp-Listing-seller-link")
   );
 
-  ads.forEach(hide);
+  ads.forEach(force ? show : hide);
 };
 
-const removeSideItemAds = () => {
+const toggleAffiliateLinksOnItemsPage = force => {
   const vipListings = document.querySelector("#vip-right-cas-listings");
 
-  hide(vipListings);
+  if (force) {
+    show(vipListings);
+  } else {
+    hide(vipListings);
+  }
 };
 
 // Watch for changes being made to the DOM tree
 const targetNode = document.querySelector("body");
 const config = { attributes: true, childList: true, subtree: true };
 const callback = () => {
-  removeHomepageAds();
-  removeSearchResultAds();
-  removeSideItemAds();
+  chrome.storage.local.get(["showAdsOnHomePage"], result => {
+    toggleAdsOnHomePage(result.showAdsOnHomePage);
+  });
+  chrome.storage.local.get(["showAdsInSearchResults"], result => {
+    toggleAdsInSearchResults(result.showAdsInSearchResults);
+  });
+  chrome.storage.local.get(["showAffiliateLinksOnItemsPage"], result => {
+    toggleAffiliateLinksOnItemsPage(result.showAffiliateLinksOnItemsPage);
+  });
 };
 const observer = new MutationObserver(callback);
 observer.observe(targetNode, config);

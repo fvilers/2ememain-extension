@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+        font-size: 16px;
+        margin: 1rem;
+        width: 400px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Options</h1>
+
+    <ul>
+      <li>
+        <input id="showAdsOnHomePage" type="checkbox" />
+        <label for="showAdsOnHomePage">
+          Show advertising links on the home page
+        </label>
+      </li>
+
+      <li>
+        <input id="showAdsInSearchResults" type="checkbox" />
+        <label for="showAdsInSearchResults">
+          Show advertising links in search results
+        </label>
+      </li>
+
+      <li>
+        <input id="showAffiliateLinksOnItemsPage" type="checkbox" />
+        <label for="showAffiliateLinksOnItemsPage">
+          Show affiliate links on an item's page
+        </label>
+      </li>
+    </ul>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
