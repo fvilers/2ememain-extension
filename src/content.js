@@ -13,9 +13,12 @@ const hide = element => {
 const toggleAdsOnHomePage = force => {
   const feedItems = document.querySelectorAll(".mp-Listing-card.feed-item");
   const ads = Array.from(feedItems).filter(item => {
-    const link = item.querySelector("a.mp-Listing-card-clickable-container");
+    const price = item.querySelector(".price-new");
 
-    return link && link.href ? !link.href.endsWith("&previousPage=home") : true;
+    return (
+      price.textContent === "Voir description" ||
+      price.textContent === "Zie omschrijving"
+    );
   });
 
   ads.forEach(force ? show : hide);
