@@ -1,9 +1,17 @@
 "use strict";
 
+const setDefaultValue = (key, value) => {
+  chrome.storage.local.get([key], result => {
+    if (result[key] === undefined) {
+      chrome.storage.local.set({ [key]: value });
+    }
+  });
+};
+
 const handleInstalled = () => {
-  chrome.storage.local.set({ showAdsOnHomePage: true });
-  chrome.storage.local.set({ showAdsInSearchResults: true });
-  chrome.storage.local.set({ showAffiliateLinksOnItemsPage: true });
+  setDefaultValue("showAdsOnHomePage", true);
+  setDefaultValue("showAdsInSearchResults", true);
+  setDefaultValue("showAffiliateLinksOnItemsPage", true);
 
   chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
     chrome.declarativeContent.onPageChanged.addRules([
