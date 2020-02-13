@@ -1,6 +1,6 @@
-const show = element => {
+const show = (element, display) => {
   if (element) {
-    element.style.display = "";
+    element.style.display = display;
   }
 };
 
@@ -21,7 +21,7 @@ const toggleAdsOnHomePage = force => {
     );
   });
 
-  ads.forEach(force ? show : hide);
+  ads.forEach(ad => (force ? show(ad, "block") : hide(ad)));
 };
 
 const toggleAdsInSearchResults = force => {
@@ -32,14 +32,14 @@ const toggleAdsInSearchResults = force => {
     item.querySelector(".mp-Listing-seller-link")
   );
 
-  ads.forEach(force ? show : hide);
+  ads.forEach(ad => (force ? show(ad, "flex") : hide(ad)));
 };
 
 const toggleAffiliateLinksOnItemsPage = force => {
   const vipListings = document.querySelector("#vip-right-cas-listings");
 
   if (force) {
-    show(vipListings);
+    show(vipListings, "block");
   } else {
     hide(vipListings);
   }
